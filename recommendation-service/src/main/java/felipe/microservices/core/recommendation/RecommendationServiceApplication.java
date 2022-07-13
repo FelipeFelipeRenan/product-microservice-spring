@@ -1,4 +1,4 @@
-package magnus.microservices.core.recommendation.recommendationservice;
+package felipe.microservices.core.recommendation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
