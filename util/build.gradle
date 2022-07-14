@@ -3,7 +3,7 @@ plugins {
 	id 'java'
 }
 
-group = 'felipe.microservices.core.api'
+group = 'felipe.microservices.core.util'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
@@ -18,7 +18,6 @@ springBootVersion = '2.7.1'
 
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
 }
 
