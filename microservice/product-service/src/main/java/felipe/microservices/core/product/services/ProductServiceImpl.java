@@ -7,10 +7,6 @@ import felipe.api.core.product.ProductService;
 import felipe.util.http.ServiceUtil;
 import felipe.api.core.product.Product;
 
- 
-/**
- * ProductServiceImpl
- */
 @RestController
 public class ProductServiceImpl implements ProductService{
     private final ServiceUtil serviceUtil;
