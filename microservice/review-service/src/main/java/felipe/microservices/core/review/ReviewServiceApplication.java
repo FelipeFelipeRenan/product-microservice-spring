@@ -1,4 +1,4 @@
-package felipe.microservices.core.review.reviewservice;
+package felipe.microservices.core.review;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
