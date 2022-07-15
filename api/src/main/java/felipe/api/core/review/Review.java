@@ -1,4 +1,4 @@
-package main.java.felipe.api.core.review;
+package felipe.api.core.review;
 
 public class Review {
 

@@ -1,4 +1,4 @@
-package main.java.felipe.api.core.review;
+package felipe.api.core.review;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

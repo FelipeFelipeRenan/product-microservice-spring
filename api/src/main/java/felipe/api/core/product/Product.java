@@ -1,4 +1,4 @@
-package main.java.felipe.api.core.product;
+package felipe.api.core.product;
 
 
 public class Product {
