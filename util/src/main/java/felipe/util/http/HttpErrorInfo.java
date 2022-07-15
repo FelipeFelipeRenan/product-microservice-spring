@@ -1,4 +1,4 @@
-package main.java.felipe.util.http;
+package felipe.util.http;
 
 public class HttpErrorInfo {
     

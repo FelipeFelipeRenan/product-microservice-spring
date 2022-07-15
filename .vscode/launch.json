@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch ProductServiceApplication",
+            "request": "launch",
+            "mainClass": "ProductServiceApplication",
+            "projectName": "product-micro"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-ProductCompositeServiceApplication<product-composite-service>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
