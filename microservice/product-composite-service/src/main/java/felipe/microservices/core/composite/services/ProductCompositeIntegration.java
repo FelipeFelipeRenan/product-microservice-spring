@@ -90,7 +90,7 @@ public class ProductCompositeIntegration implements ProductService, Recommendati
     }
 
     @Override
-    public List<Review> getReview(int productId){
+    public List<Review> getReviews(int productId){
         
         String url = reviewServiceUrl + Integer.toString(productId);
         List<Review> reviews = restTemplate.exchange(url, HttpMethod.GET, null,

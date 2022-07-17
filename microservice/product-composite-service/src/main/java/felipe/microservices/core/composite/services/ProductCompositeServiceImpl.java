@@ -33,7 +33,7 @@ public class ProductCompositeServiceImpl implements ProductCompositeService{
 
         Product product = integration.getProduct(productId);
         List<Recommendation> recommendations = integration.getRecommendations(productId);
-        List<Review> reviews = integration.getReview(productId);
+        List<Review> reviews = integration.getReviews(productId);
         
         return createProductAggregate(product, recommendations,
         reviews, serviceUtil.getServiceAddress());
