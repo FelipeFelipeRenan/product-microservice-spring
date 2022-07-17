@@ -3,13 +3,13 @@ package felipe.api.core.review;
 public class Review {
 
     private final int productId;
-    private final String reviewId;
+    private final int reviewId;
     private final String author;
     private final String subject;
     private final String content;
     private final String serviceAddress;
 
-    public Review(int productId, String reviewId, String author, String subject, String content,
+    public Review(int productId, int reviewId, String author, String subject, String content,
             String serviceAddress) {
         this.productId = productId;
         this.reviewId = reviewId;
@@ -21,7 +21,7 @@ public class Review {
     public int getProductId() {
         return productId;
     }
-    public String getReviewId() {
+    public int getReviewId() {
         return reviewId;
     }
     public String getAuthor() {
