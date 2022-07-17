@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 public interface ReviewService {
     @GetMapping(value = "/review/{reviewId}" , produces = "application/json")
-    List<Review> getReview(@PathVariable int reviewId);
+    List<Review> getReviews(@PathVariable int reviewId);
 }
