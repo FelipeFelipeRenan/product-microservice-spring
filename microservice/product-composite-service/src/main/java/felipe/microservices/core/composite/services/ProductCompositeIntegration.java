@@ -37,7 +37,7 @@ public class ProductCompositeIntegration implements ProductService, Recommendati
     private final String recommendationServiceUrl;
     private final String reviewServiceUrl;
 
-    @Autowired
+    
     public ProductCompositeIntegration(
             RestTemplate restTemplate,
             ObjectMapper mapper,

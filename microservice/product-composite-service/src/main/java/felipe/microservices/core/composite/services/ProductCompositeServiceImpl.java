@@ -20,7 +20,7 @@ import felipe.util.http.ServiceUtil;
 public class ProductCompositeServiceImpl implements ProductCompositeService{
 
     private final ServiceUtil serviceUtil;
-    private ProductCompositeIntegration integration;
+    private ProductCompositeIntegration integration;    
     
     @Autowired
     public ProductCompositeServiceImpl(ServiceUtil serviceUtil, ProductCompositeIntegration integration) {
@@ -32,6 +32,8 @@ public class ProductCompositeServiceImpl implements ProductCompositeService{
     public ProductAggregate getProduct(int productId){
 
         Product product = integration.getProduct(productId);
+
+
         List<Recommendation> recommendations = integration.getRecommendations(productId);
         List<Review> reviews = integration.getReviews(productId);
         

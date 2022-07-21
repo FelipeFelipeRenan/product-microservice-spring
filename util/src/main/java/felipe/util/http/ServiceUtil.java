@@ -22,7 +22,7 @@ public class ServiceUtil {
         if(this.serviceAddress == null){
             serviceAddress = findMyHostname() + "/" + findMyIpAddress() + ":" + port;
         }
-        return "Address: localhost";
+        return serviceAddress;
     }
     
     public String findMyHostname(){
