@@ -56,6 +56,16 @@
             "projectName": "product-service",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ReviewServiceApplication<review-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "felipe.microservices.core.review.ReviewServiceApplication",
+            "projectName": "review-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

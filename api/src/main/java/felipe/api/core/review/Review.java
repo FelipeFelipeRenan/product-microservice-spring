@@ -9,6 +9,15 @@ public class Review {
     private final String content;
     private final String serviceAddress;
 
+    public Review() {
+        productId = 0;
+        reviewId = 0;
+        author = null;
+        subject = null;
+        content = null;
+        serviceAddress = null;
+      }
+
     public Review(int productId, int reviewId, String author, String subject, String content,
             String serviceAddress) {
         this.productId = productId;
