@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = RANDOM_PORT)
 class ProductCompositeServiceApplicationTests {
 	@Autowired
 	private WebTestClient client;
@@ -33,6 +33,20 @@ class ProductCompositeServiceApplicationTests {
 			.jsonPath("$.productId").isEqualTo(PRODUCT_ID_OK)
 			.jsonPath("$.recommendation.lenght()").isEqualTo(1)
 			.jsonPath("$.review.lenght()").isEqualTo(1);
+	}
+
+	@Test
+	public void getProductNotFound(){
+		client.get()
+			.uri("/product-composite/" + PRODUCT_ID_NOT_FOUND)
+			.accept(APPLICATION_JSON)
+			.exchange()
+			.expectStatus().isNotFound()
+			.expectBody()
+			.jsonPath("$.path").isEqualTo("/product-composite/" + 
+			PRODUCT_ID_NOT_FOUND)
+			.jsonPath("$.path").isEqualTo("NOT FOUND: " +
+			PRODUCT_ID_NOT_FOUND);
 	}
 
 }
