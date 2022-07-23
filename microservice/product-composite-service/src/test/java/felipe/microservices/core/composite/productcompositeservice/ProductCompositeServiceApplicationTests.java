@@ -49,8 +49,8 @@ class ProductCompositeServiceApplicationTests {
 						PRODUCT_ID_NOT_FOUND));
 
 		when(compositeIntegration.getProduct(PRODUCT_ID_INVALID))
-			.thenThrow(new InvalidInputException("INVALID: " + 
-			PRODUCT_ID_INVALID));
+				.thenThrow(new InvalidInputException("INVALID: " +
+						PRODUCT_ID_INVALID));
 	}
 
 	@Test
@@ -67,8 +67,8 @@ class ProductCompositeServiceApplicationTests {
 				.expectHeader().contentType(APPLICATION_JSON)
 				.expectBody()
 				.jsonPath("$.productId").isEqualTo(PRODUCT_ID_OK)
-				.jsonPath("$.recommendation.lenght()").isEqualTo(1)
-				.jsonPath("$.review.lenght()").isEqualTo(1);
+				.jsonPath("$.recommendations.length()").isEqualTo(1)
+				.jsonPath("$.reviews.length()").isEqualTo(1);
 	}
 
 	@Test
@@ -81,8 +81,21 @@ class ProductCompositeServiceApplicationTests {
 				.expectBody()
 				.jsonPath("$.path").isEqualTo("/product-composite/" +
 						PRODUCT_ID_NOT_FOUND)
-				.jsonPath("$.path").isEqualTo("NOT FOUND: " +
+				.jsonPath("$.message").isEqualTo("NOT FOUND: " +
 						PRODUCT_ID_NOT_FOUND);
+	}
+
+	@Test
+	public void getProductInvalidInput() {
+		client.get()
+				.uri("/product-composite/" + PRODUCT_ID_INVALID)
+				.accept(APPLICATION_JSON)
+				.exchange()
+				.expectStatus().isEqualTo(UNPROCESSABLE_ENTITY)
+				.expectHeader().contentType(APPLICATION_JSON)
+				.expectBody()
+				.jsonPath("$.path").isEqualTo("/product-composite/" + PRODUCT_ID_INVALID)
+				.jsonPath("$.message").isEqualTo("INVALID: " + PRODUCT_ID_INVALID);
 	}
 
 }
