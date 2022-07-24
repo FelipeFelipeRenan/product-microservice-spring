@@ -1,7 +1,21 @@
-FROM openjdk:16
+FROM eclipse-temurin:17 AS builder
 
-EXPOSE 8080
+WORKDIR /extracted
 
 ADD ./build/libs/*.jar app.jar
 
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+RUN java -Djarmode=layertools -jar app.jar extract
+
+
+FROM eclipse-temurin:17
+
+WORKDIR /application
+
+COPY --from=builder /extracted/dependencies/ ./
+COPY --from=builder /extracted/spring-boot-loader/ ./
+COPY --from=builder /extracted/snapshot-dependencies/ ./
+COPY --from=builder /extracted/application/ ./
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
