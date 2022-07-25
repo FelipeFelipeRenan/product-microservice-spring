@@ -58,7 +58,7 @@ class ProductCompositeServiceApplicationTests {
 	}
 
 	@Test
-	void getProductByIs() {
+	void getProductById() {
 		client.get()
 				.uri("/product-composite/" + PRODUCT_ID_OK)
 				.accept(APPLICATION_JSON)

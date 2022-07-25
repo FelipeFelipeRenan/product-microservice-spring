@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 
+
 @SpringBootApplication
 @ComponentScan("felipe")
 public class ProductCompositeServiceApplication {
@@ -19,4 +20,10 @@ public class ProductCompositeServiceApplication {
 		return new RestTemplate();
 	}
 
+	
+	
+
+
+
+	
 }
