@@ -6,6 +6,12 @@ logging:
   level:
     root: INFO
     felipe: DEBUG
+spring:
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+
 
 ---
 

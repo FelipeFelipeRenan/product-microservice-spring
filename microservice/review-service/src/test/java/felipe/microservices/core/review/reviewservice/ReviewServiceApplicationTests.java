@@ -1,5 +1,4 @@
 package felipe.microservices.core.review.reviewservice;
-
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
@@ -13,12 +12,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 class ReviewServiceApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
-
-	@Autowired 
-	private WebTestClient client;
+  @Autowired private WebTestClient client;
 
   @Test
   void getReviewsByProductId() {
