@@ -3,6 +3,7 @@ package felipe.util.http;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -10,11 +11,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import felipe.api.exceptions.BadRequestException;
 import felipe.api.exceptions.InvalidInputException;
 import felipe.api.exceptions.NotFoundException;
 
 @RestControllerAdvice
 public class GlobalControllerExceptionHandler {
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(BadRequestException.class)
+    public @ResponseBody HttpErrorInfo handleBadRequestExceptions(
+      ServerHttpRequest request, BadRequestException ex) {
+  
+      return createHttpErrorInfo(HttpStatus.BAD_REQUEST, request, ex);
+    }
 
     @ResponseStatus(NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
