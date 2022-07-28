@@ -1,6 +1,6 @@
 package felipe.util.http;
 
-
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 
@@ -18,14 +18,13 @@ import felipe.api.exceptions.NotFoundException;
 @RestControllerAdvice
 public class GlobalControllerExceptionHandler {
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(BadRequestException.class)
     public @ResponseBody HttpErrorInfo handleBadRequestExceptions(
       ServerHttpRequest request, BadRequestException ex) {
   
-      return createHttpErrorInfo(HttpStatus.BAD_REQUEST, request, ex);
+      return createHttpErrorInfo(BAD_REQUEST, request, ex);
     }
-
     @ResponseStatus(NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     public @ResponseBody HttpErrorInfo handleNotFoundException(ServerHttpRequest request,
