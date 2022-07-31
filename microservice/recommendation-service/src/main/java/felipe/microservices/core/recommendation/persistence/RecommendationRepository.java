@@ -3,10 +3,9 @@ package felipe.microservices.core.recommendation.persistence;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface RecommendationRepository extends CrudRepository
-<RecommendationEntity, String>{
-
-    List<RecommendationEntity> findByProductId(int productId);
-    
+@Repository
+public interface RecommendationRepository extends CrudRepository<RecommendationEntity, String> {
+  List<RecommendationEntity> findByProductId(int productId);
 }

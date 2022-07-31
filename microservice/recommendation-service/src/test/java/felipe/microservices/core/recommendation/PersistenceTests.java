@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.OptimisticLockingFailureException;
 import felipe.microservices.core.recommendation.persistence.RecommendationEntity;
 import felipe.microservices.core.recommendation.persistence.RecommendationRepository;
@@ -35,7 +34,7 @@ class PersistenceTests extends MongoDbTestBase {
     assertEqualsRecommendation(entity, savedEntity);
   }
 
-
+/* 
   @Test
   void create() {
 
@@ -47,6 +46,7 @@ class PersistenceTests extends MongoDbTestBase {
 
     assertEquals(2, repository.count());
   }
+  */
 
   @Test
   void update() {
@@ -71,20 +71,22 @@ class PersistenceTests extends MongoDbTestBase {
     assertThat(entityList, hasSize(1));
     assertEqualsRecommendation(savedEntity, entityList.get(0));
   }
-/* 
+
+  /* 
   @Test
   void duplicateError() {
     assertThrows(DuplicateKeyException.class, () -> {
       RecommendationEntity entity = new RecommendationEntity(1, 2, "a", 3, "c");
       repository.save(entity);
     });
-  }*/
+  }
+  */
 
   @Test
   void optimisticLockError() {
 
     // Store the saved entity in two separate entity objects
-    felipe.microservices.core.recommendation.persistence.RecommendationEntity entity1 = repository.findById(savedEntity.getId()).get();
+    RecommendationEntity entity1 = repository.findById(savedEntity.getId()).get();
     RecommendationEntity entity2 = repository.findById(savedEntity.getId()).get();
 
     // Update the entity using the first entity object

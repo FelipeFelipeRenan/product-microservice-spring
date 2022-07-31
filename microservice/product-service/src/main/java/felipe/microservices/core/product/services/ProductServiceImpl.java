@@ -16,50 +16,56 @@ import felipe.api.core.product.Product;
 @RestController
 public class ProductServiceImpl implements ProductService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ProductServiceImpl.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ProductServiceImpl.class);
 
-    private final ServiceUtil serviceUtil;
+  private final ServiceUtil serviceUtil;
 
-    private final ProductRepository repository;
+  private final ProductRepository repository;
 
-    private final ProductMapper mapper;
+  private final ProductMapper mapper;
 
-    @Autowired
-    public ProductServiceImpl(ProductRepository repository, ProductMapper mapper,  ServiceUtil serviceUtil) {
-        this.repository = repository;
-        this.serviceUtil = serviceUtil;
-        this.mapper = mapper;
+  @Autowired
+  public ProductServiceImpl(ProductRepository repository, ProductMapper mapper, ServiceUtil serviceUtil) {
+    this.repository = repository;
+    this.mapper = mapper;
+    this.serviceUtil = serviceUtil;
+  }
+
+  @Override
+  public Product createProduct(Product body) {
+    try {
+      ProductEntity entity = mapper.apiToEntity(body);
+      ProductEntity newEntity = repository.save(entity);
+
+      LOG.debug("createProduct: entity created for productId: {}", body.getProductId());
+      return mapper.entityToApi(newEntity);
+
+    } catch (DuplicateKeyException dke) {
+      throw new InvalidInputException("Duplicate key, Product Id: " + body.getProductId());
+    }
+  }
+
+  @Override
+  public Product getProduct(int productId) {
+
+    if (productId < 1) {
+      throw new InvalidInputException("Invalid productId: " + productId);
     }
 
-    @Override
-    public Product getProduct(int productId) {
-        LOG.debug("/product return the found product for productId={}", productId);
+    ProductEntity entity = repository.findByProductId(productId)
+        .orElseThrow(() -> new NotFoundException("No product found for productId: " + productId));
 
-        if (productId < 1) {
-            throw new InvalidInputException("Invalid productId: " + productId);
-        }
-        ProductEntity entity = repository.findByProductId(productId)
-            .orElseThrow(() -> new NotFoundException("No product found for productId: " + productId));
+    Product response = mapper.entityToApi(entity);
+    response.setServiceAddress(serviceUtil.getServiceAddress());
 
-        Product response = mapper.entityToApi(entity);
-        response.setServiceAddress(serviceUtil.getServiceAddress());
-        return response;
-        }
+    LOG.debug("getProduct: found productId: {}", response.getProductId());
 
-    @Override
-    public Product createProduct(Product body){
-        try {
-            ProductEntity entity = mapper.apiToEntity(body);
-            ProductEntity newEntity = repository.save(entity);
-            return mapper.entityToApi(newEntity);
-        } catch (DuplicateKeyException dke) {
-            throw new InvalidInputException("Duplicated key, Product Id: " + body.getProductId());
-        
-        }
-    }
+    return response;
+  }
 
-    @Override
-    public void deleteProduct(int productId){
-        repository.findByProductId(productId).ifPresent(e -> repository.delete(e));
-    }
+  @Override
+  public void deleteProduct(int productId) {
+    LOG.debug("deleteProduct: tries to delete an entity with productId: {}", productId);
+    repository.findByProductId(productId).ifPresent(e -> repository.delete(e));
+  }
 }

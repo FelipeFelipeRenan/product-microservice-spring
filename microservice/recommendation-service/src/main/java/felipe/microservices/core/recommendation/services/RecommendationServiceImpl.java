@@ -1,6 +1,5 @@
 package felipe.microservices.core.recommendation.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -17,9 +16,9 @@ import felipe.microservices.core.recommendation.persistence.RecommendationReposi
 import felipe.util.http.ServiceUtil;
 
 @RestController
-public class RecommendatioServiceImpl implements RecommendationService {
+public class RecommendationServiceImpl implements RecommendationService {
 
-  private static final Logger LOG = LoggerFactory.getLogger(RecommendationService.class);
+  private static final Logger LOG = LoggerFactory.getLogger(RecommendationServiceImpl.class);
 
   private final RecommendationRepository repository;
 
@@ -28,11 +27,27 @@ public class RecommendatioServiceImpl implements RecommendationService {
   private final ServiceUtil serviceUtil;
 
   @Autowired
-  public RecommendatioServiceImpl(RecommendationRepository repository, ServiceUtil serviceUtil,
-      RecommendationMapper mapper) {
+  public RecommendationServiceImpl(RecommendationRepository repository, RecommendationMapper mapper,
+      ServiceUtil serviceUtil) {
     this.repository = repository;
-    this.serviceUtil = serviceUtil;
     this.mapper = mapper;
+    this.serviceUtil = serviceUtil;
+  }
+
+  @Override
+  public Recommendation createRecommendation(Recommendation body) {
+    try {
+      RecommendationEntity entity = mapper.apiToEntity(body);
+      RecommendationEntity newEntity = repository.save(entity);
+
+      LOG.debug("createRecommendation: created a recommendation entity: {}/{}", body.getProductId(),
+          body.getRecommendationId());
+      return mapper.entityToApi(newEntity);
+
+    } catch (DuplicateKeyException dke) {
+      throw new InvalidInputException(
+          "Duplicate key, Product Id: " + body.getProductId() + ", Recommendation Id:" + body.getRecommendationId());
+    }
   }
 
   @Override
@@ -46,23 +61,9 @@ public class RecommendatioServiceImpl implements RecommendationService {
     List<Recommendation> list = mapper.entityListToApiList(entityList);
     list.forEach(e -> e.setServiceAddress(serviceUtil.getServiceAddress()));
 
+    LOG.debug("getRecommendations: response size: {}", list.size());
+
     return list;
-  }
-
-  @Override
-  public Recommendation createRecommendations(Recommendation body) {
-    try {
-      RecommendationEntity entity = mapper.apiToEntity(body);
-      RecommendationEntity newEntity = repository.save(entity);
-
-      LOG.debug("createRecommendation: created a recommendation entity: {}/{}", body.getProductId(),
-          body.getRecommendationId());
-
-      return mapper.entityToApi(newEntity);
-    } catch (DuplicateKeyException dke) {
-      throw new InvalidInputException(
-          "Duplicate key, Product Id: " + body.getProductId() + ", Recommendation Id:" + body.getRecommendationId());
-    }
   }
 
   @Override
@@ -70,5 +71,4 @@ public class RecommendatioServiceImpl implements RecommendationService {
     LOG.debug("deleteRecommendations: tries to delete recommendations for the product with productId: {}", productId);
     repository.deleteAll(repository.findByProductId(productId));
   }
-
 }

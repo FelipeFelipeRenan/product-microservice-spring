@@ -1,7 +1,6 @@
 package felipe.api.core.review;
 
 public class Review {
-
     private int productId;
     private int reviewId;
     private String author;
@@ -16,10 +15,16 @@ public class Review {
         subject = null;
         content = null;
         serviceAddress = null;
-      }
+    }
 
-    public Review(int productId, int reviewId, String author, String subject, String content,
+    public Review(
+            int productId,
+            int reviewId,
+            String author,
+            String subject,
+            String content,
             String serviceAddress) {
+
         this.productId = productId;
         this.reviewId = reviewId;
         this.author = author;
@@ -27,21 +32,27 @@ public class Review {
         this.content = content;
         this.serviceAddress = serviceAddress;
     }
+
     public int getProductId() {
         return productId;
     }
+
     public int getReviewId() {
         return reviewId;
     }
+
     public String getAuthor() {
         return author;
     }
+
     public String getSubject() {
         return subject;
     }
+
     public String getContent() {
         return content;
     }
+
     public String getServiceAddress() {
         return serviceAddress;
     }
@@ -69,9 +80,4 @@ public class Review {
     public void setServiceAddress(String serviceAddress) {
         this.serviceAddress = serviceAddress;
     }
-
-        
-
-
-
 }
