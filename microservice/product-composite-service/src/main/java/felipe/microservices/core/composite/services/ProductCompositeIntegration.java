@@ -107,7 +107,6 @@ public class ProductCompositeIntegration implements ProductService, Recommendati
 
   @Override
   public Recommendation createRecommendation(Recommendation body) {
-
     try {
       String url = recommendationServiceUrl;
       LOG.debug("Will post a new recommendation to URL: {}", url);

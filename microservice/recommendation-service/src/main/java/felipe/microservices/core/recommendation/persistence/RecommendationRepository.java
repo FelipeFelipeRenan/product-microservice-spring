@@ -1,11 +1,9 @@
 package felipe.microservices.core.recommendation.persistence;
 
-import java.util.List;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Mono;
 
-@Repository
-public interface RecommendationRepository extends CrudRepository<RecommendationEntity, String> {
-  List<RecommendationEntity> findByProductId(int productId);
+public interface RecommendationRepository extends ReactiveCrudRepository<RecommendationEntity, String> {
+  Mono<RecommendationEntity> findByProductId(int productId);
 }

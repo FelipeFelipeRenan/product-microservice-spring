@@ -1,6 +1,5 @@
 package felipe.microservices.core.review.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;

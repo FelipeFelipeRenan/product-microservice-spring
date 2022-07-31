@@ -3,7 +3,6 @@ package felipe.microservices.core.recommendation.persistence;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "recommendations")
@@ -16,7 +15,6 @@ public class RecommendationEntity {
     @Version
     private Integer version;
 
-    @Indexed(unique = true)
     private int productId;
     private int recommendationId;
     private String author;
