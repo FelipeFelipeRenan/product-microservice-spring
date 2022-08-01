@@ -1,5 +1,8 @@
 package felipe.microservices.core.product.persistence;
 
+import static java.lang.String.format;
+
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -19,6 +22,11 @@ public class ProductEntity {
   private int weight;
 
   public ProductEntity() {}
+
+  @Override
+  public String toString() {
+    return format("ProductEntity: %s", productId);
+  }
 
   public ProductEntity(int productId, String name, int weight) {
     this.productId = productId;
