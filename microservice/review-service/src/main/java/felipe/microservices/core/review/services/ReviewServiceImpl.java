@@ -1,5 +1,8 @@
 package felipe.microservices.core.review.services;
 
+import static java.util.logging.Level.FINE;
+
+
 import java.util.List;
 
 import org.slf4j.Logger;
