@@ -25,11 +25,7 @@ public interface RecommendationService {
   Flux<Recommendation> getRecommendations(
     @RequestParam(value = "productId", required = true) int productId);
 
-  /**
-   * Sample usage: "curl -X DELETE $HOST:$PORT/recommendation?productId=1".
-   *
-   * @param productId Id of the product
-   */
+  
 
   Mono<Void> deleteRecommendations(int productId);
 }
